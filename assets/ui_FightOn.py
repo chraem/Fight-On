@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'FightOnbVmwRP.ui'
+## Form generated from reading UI file 'FightOnKleUJv.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -130,6 +130,7 @@ class Ui_MainWindow(object):
         self.lexical_Tbl.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.lexical_Tbl.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.lexical_Tbl.horizontalHeader().setStretchLastSection(True)
+        self.lexical_Tbl.verticalHeader().setVisible(False)
 
         self.gridLayout_4.addWidget(self.lexical_Tbl, 0, 0, 1, 1)
 
@@ -194,12 +195,14 @@ class Ui_MainWindow(object):
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
         self.lexicalError_Tbl = QTableWidget(self.LexicalError)
-        if (self.lexicalError_Tbl.columnCount() < 2):
-            self.lexicalError_Tbl.setColumnCount(2)
+        if (self.lexicalError_Tbl.columnCount() < 3):
+            self.lexicalError_Tbl.setColumnCount(3)
         __qtablewidgetitem6 = QTableWidgetItem()
         self.lexicalError_Tbl.setHorizontalHeaderItem(0, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
         self.lexicalError_Tbl.setHorizontalHeaderItem(1, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.lexicalError_Tbl.setHorizontalHeaderItem(2, __qtablewidgetitem8)
         self.lexicalError_Tbl.setObjectName(u"lexicalError_Tbl")
         self.lexicalError_Tbl.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid rgb(51, 69, 83);")
@@ -209,6 +212,7 @@ class Ui_MainWindow(object):
         self.lexicalError_Tbl.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.lexicalError_Tbl.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.lexicalError_Tbl.horizontalHeader().setStretchLastSection(True)
+        self.lexicalError_Tbl.verticalHeader().setVisible(False)
 
         self.gridLayout_8.addWidget(self.lexicalError_Tbl, 0, 0, 1, 1)
 
@@ -222,12 +226,12 @@ class Ui_MainWindow(object):
         self.syntaxError_Tbl = QTableWidget(self.SyntaxError)
         if (self.syntaxError_Tbl.columnCount() < 3):
             self.syntaxError_Tbl.setColumnCount(3)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.syntaxError_Tbl.setHorizontalHeaderItem(0, __qtablewidgetitem8)
         __qtablewidgetitem9 = QTableWidgetItem()
-        self.syntaxError_Tbl.setHorizontalHeaderItem(1, __qtablewidgetitem9)
+        self.syntaxError_Tbl.setHorizontalHeaderItem(0, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
-        self.syntaxError_Tbl.setHorizontalHeaderItem(2, __qtablewidgetitem10)
+        self.syntaxError_Tbl.setHorizontalHeaderItem(1, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.syntaxError_Tbl.setHorizontalHeaderItem(2, __qtablewidgetitem11)
         self.syntaxError_Tbl.setObjectName(u"syntaxError_Tbl")
         self.syntaxError_Tbl.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid rgb(51, 69, 83);")
@@ -344,9 +348,9 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem = self.lexical_Tbl.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Line", None));
         ___qtablewidgetitem1 = self.lexical_Tbl.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Lexeme", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Token", None));
         ___qtablewidgetitem2 = self.lexical_Tbl.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Token", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Lexeme", None));
         self.rightTabWidget.setTabText(self.rightTabWidget.indexOf(self.Lexical), QCoreApplication.translate("MainWindow", u"Lexical", None))
         ___qtablewidgetitem3 = self.syntax_Tbl.horizontalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Line", None));
@@ -359,13 +363,15 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Line", None));
         ___qtablewidgetitem7 = self.lexicalError_Tbl.horizontalHeaderItem(1)
         ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Error", None));
+        ___qtablewidgetitem8 = self.lexicalError_Tbl.horizontalHeaderItem(2)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Description", None));
         self.botTabWidget.setTabText(self.botTabWidget.indexOf(self.LexicalError), QCoreApplication.translate("MainWindow", u"Lexical Error", None))
-        ___qtablewidgetitem8 = self.syntaxError_Tbl.horizontalHeaderItem(0)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Line", None));
-        ___qtablewidgetitem9 = self.syntaxError_Tbl.horizontalHeaderItem(1)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Production", None));
-        ___qtablewidgetitem10 = self.syntaxError_Tbl.horizontalHeaderItem(2)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Error", None));
+        ___qtablewidgetitem9 = self.syntaxError_Tbl.horizontalHeaderItem(0)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Line", None));
+        ___qtablewidgetitem10 = self.syntaxError_Tbl.horizontalHeaderItem(1)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Production", None));
+        ___qtablewidgetitem11 = self.syntaxError_Tbl.horizontalHeaderItem(2)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"Error", None));
         self.botTabWidget.setTabText(self.botTabWidget.indexOf(self.SyntaxError), QCoreApplication.translate("MainWindow", u"SyntaxError", None))
         self.newFile_Btn.setText(QCoreApplication.translate("MainWindow", u"New File", None))
 #if QT_CONFIG(shortcut)
