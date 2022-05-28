@@ -7,6 +7,7 @@ authors = ["chraem <calumbiranc@gmail.com>"]
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
 PySide2 = "^5.15.2"
+lark = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 
