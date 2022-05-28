@@ -269,6 +269,9 @@ border: 1px solid rgb(51, 69, 83);</string>
                    <attribute name="horizontalHeaderStretchLastSection">
                     <bool>true</bool>
                    </attribute>
+                   <attribute name="verticalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
                    <column>
                     <property name="text">
                      <string>Line</string>
@@ -276,12 +279,12 @@ border: 1px solid rgb(51, 69, 83);</string>
                    </column>
                    <column>
                     <property name="text">
-                     <string>Lexeme</string>
+                     <string>Token</string>
                     </property>
                    </column>
                    <column>
                     <property name="text">
-                     <string>Token</string>
+                     <string>Lexeme</string>
                     </property>
                    </column>
                   </widget>
@@ -433,6 +436,9 @@ border: 1px solid rgb(51, 69, 83);</string>
                 <attribute name="horizontalHeaderStretchLastSection">
                  <bool>true</bool>
                 </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
                 <column>
                  <property name="text">
                   <string>Line</string>
@@ -441,6 +447,11 @@ border: 1px solid rgb(51, 69, 83);</string>
                 <column>
                  <property name="text">
                   <string>Error</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Description</string>
                  </property>
                 </column>
                </widget>
