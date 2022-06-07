@@ -1,0 +1,14 @@
+program : "START" global* "PAUSE" "(" ")" ":" "PLAY" "END"
+global: global_statement global*
+global_statement: "STOCK" type "Identifier" stock_dec
+stock_dec: "=" expression | "[" expression "]" stock_arrayopt1
+stock_arrayopt1: "=" stock_array1d | "[" expression "]"
+stock_array1d: "{" expr "}"
+expression: literals 
+expr: expression exprs*
+exprs: "," expression exprs*
+literals: "ClockLiteral" | "HoverLiteral" | "CoinLiteral" | "RuneLiteral" | "RopeLiteral"
+type: "clock" | "hover" | "coin" | "rune" | "rope"
+    
+%import common.WS
+%ignore WS      
