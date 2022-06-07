@@ -1,5 +1,5 @@
-import json
 import re
+import json
 
 with open("reservedWordsAndSymbols.json", "r") as f:
     json_file = json.load(f)
@@ -37,10 +37,12 @@ def checkStringContent(string):
     for i in range(len(string)):
         if(i == len(string)):
             break
-        elif(string[len(string)-3] == "\\"):
+        elif(string[len(string)-2] == "\\"):
             return "Missing \" (Double quotation)"
-        elif(string[i] == "\\" and checkContent("esc_seq", string[i+1]) == True):
+        elif(string[i] == "\\" and checkContent("esc_seq", string[i+1])):
             return ""
+        elif(string[i] == "\\" and checkContent("esc_seq", string[i+1]) and string[len(string)-1] != "\""):
+            return "Missing \" (Double quotation)"
         elif(string[i] == "\\" and checkContent("esc_seq", string[i+1]) == False):
             return "Unrecognized escaped character: \\" + string[i+1]  
         else:
