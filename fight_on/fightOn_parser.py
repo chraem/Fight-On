@@ -1,4 +1,3 @@
-
 from lark import Lark
 
 def fightOn_parser(lexicalToken):
@@ -8,13 +7,16 @@ def fightOn_parser(lexicalToken):
         Tokens.append(token[1].replace(" ", ""))
     
     tokens = " ".join(Tokens)
-    print(tokens)
     
     with open("fight_on\cfg_lark.txt", "r") as file:
         cfgLark = file.read()
     
     cfg = Lark(r"{}".format(cfgLark), start = "program")
-    
     parseTree = cfg.parse(tokens)
-    print(parseTree.pretty())
+    
+    try:
+        return parseTree.pretty()
+    except Exception as syntaxError:
+        print(">>", syntaxError)
+    
     

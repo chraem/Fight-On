@@ -1,14 +1,137 @@
 program : "START" global* "PAUSE" "(" ")" ":" "PLAY" "END"
 global: global_statement global*
-global_statement: "STOCK" type "Identifier" stock_dec
-stock_dec: "=" expression | "[" expression "]" stock_arrayopt1
-stock_arrayopt1: "=" stock_array1d | "[" expression "]"
-stock_array1d: "{" expr "}"
-expression: literals 
+
+global_statement: "STOCK" type "Identifier" stock_dec morestock_dec* ";"
+    | "tower" "Identifier" "{" type "Identifier" array1d_ind* moretowermem* ";" moretowermem_dec* "}" ";"
+    | type "Identifier" vardec_opt* morevardec_opt* ";"
+    | "quest" "Identifier" "(" func_param* ")" "{" statements* "}"
+type: "clock" 
+    | "hover" 
+    | "coin" 
+    | "rune" 
+    | "rope"
+literals: "ClockLiteral" 
+    | "HoverLiteral" 
+    | "CoinLiteral" 
+    | "RuneLiteral" 
+    | "RopeLiteral"
+assign_oprtr: "="    
+    | "+="
+    | "-="
+    | "*="
+    | "/="
+    | "%="
+notassign_operators: "+"
+    | "-"
+    | "*"
+    | "/"
+    | "%"
+    | "AND"
+    | "OR"
+    | "<"
+    | ">"
+    | ">="
+    | "<="
+    | "=="
+    | "!="
+unary_oprtr: "++"
+    | "--"
+
 expr: expression exprs*
+
 exprs: "," expression exprs*
-literals: "ClockLiteral" | "HoverLiteral" | "CoinLiteral" | "RuneLiteral" | "RopeLiteral"
-type: "clock" | "hover" | "coin" | "rune" | "rope"
-    
+
+morestock_dec: "," "Identifier" stock_dec morestock_dec*
+
+stock_dec: "=" expression 
+    | "[" expression "]" stock_arrayopt1
+stock_arrayopt1: "=" stock_array1d 
+    | "[" expression "]" stock_arrayopt2
+stock_arrayopt2: "=" stock_array2d
+    | "[" expression "]" "=" stock_array3d
+stock_array1d: "{" expr* "}"
+stock_array2d: "{" stock_array1d morestock_arr1d* "}"
+stock_array3d: "{" stock_array2d morestock_arr2d* "}"
+morestock_arr1d: "," stock_array1d morestock_arr1d*
+
+morestock_arr2d: "," stock_array2d morestock_arr2d* 
+
+moretowermem: "," "Identifier" array1d_ind* moretowermem*
+
+moretowermem_dec: type "Identifier" array1d_ind* moretowermem* ";" moretowermem_dec*
+
+array1d_ind: "[" expression "]" array2d_ind*
+
+array2d_ind: "[" expression "]" array3d_ind*
+
+array3d_ind: "[" expression "]"
+
+expression: literals expr_ext*
+    | "Identifier" id_suffix expr_ext*
+    | "(" expression ")" expr_ext*
+    | "NOT" expression
+    | "~" expression
+expr_ext: notassign_operators expression
+
+id_suffix: "(" expr* ")"
+    | array1d_ind* id_at* unary_oprtr*
+id_at: "@" "Identifier" array1d_ind*
+
+vardec_opt: "=" expression
+    | "[" expression "]" array1d*
+
+morevardec_opt: "," "Identifier" vardec_opt* morevardec_opt*
+
+array1d: "[" expression "]" array2d*
+    | "=" stock_array1d
+
+array2d: "[" expression "]" array3d* 
+    | "=" stock_array2d
+
+array3d: "=" stock_array3d
+
+func_param: parameter parameters*
+
+parameter: type "Identifier"
+    | "Identifier" "Identifier"
+parameters: "," parameter parameters*
+
+statements: statement statements*
+
+statement: "STOCK" type "Identifier" stock_dec morestock_dec* ";"
+    | type "Identifier" vardec_opt* morevardec_opt* ";"
+    | "Identifier" startswith_idnext ";"
+    | "sprint" "(" initialization* ";" expression_null* ";" iteration* ")" "{" statements* "}"
+    | "quit" ";"
+    | "skip" ";"
+    | "bag" "(" expression ")" "{" item_statement* potion_statement* "}"
+    | "flight" "(" expression ")" "{" statements* "}"
+    | "take" "{" statements* "}" "(" expression ")" ";"
+    | "punch" "(" expression ")" "{" statements* "}" kick_statement* ultimate_statement*
+    | "say" "(" expression exprs* ")" ";"
+    | "listen" "(" "Identifier" array1d_ind* id_at* ")" ";"
+    | "return" expression_null* ";"
+startswith_idnext: "Identifier" array1d_ind* moretowermem*
+    | "(" expr* ")"
+    | array1d_ind* id_at* iteration_suffix*
+initialization: type "Identifier" "=" expression
+    | "Identifier" array1d_ind* id_at* assign_oprtr expression
+
+expression_null: expression
+
+iteration: "Identifier" array1d_ind* id_at* iteration_suffix
+
+iteration_suffix: "++"
+    | "--"
+    | assign_oprtr expression
+kick_statement: "kick" "(" expression ")" "{" statements* "}" kick_statement*
+
+ultimate_statement: "ultimate" "{" statements* "}"
+
+item_statement: "item" literals ":" statements* item_statement*
+
+potion_statement: "potion" ":" statements*
+
+%import common.ESCAPED_STRING
 %import common.WS
 %ignore WS      

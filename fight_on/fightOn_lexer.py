@@ -11,7 +11,6 @@ def tokenize(sourceCode):
         lexicalError = []
         lexicalToken = []
         
-                
         while(index < sourceCodeLength):
             if(sourceCode[index] == "\n"):
                 lineNumber += 1
@@ -114,16 +113,16 @@ def tokenize(sourceCode):
                         break
                       
                 if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1] ):
-                    print("currentLexeme(rune): ",currentLexeme[0])
-                    print("currentLexeme(rune): ",currentLexeme[len(currentLexeme)-2])
+                    # print("currentLexeme(rune): ",currentLexeme[0])
+                    # print("currentLexeme(rune): ",currentLexeme[len(currentLexeme)-2])
                     lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
                     lexicalToken.append([str(lineNumber), "L9", currentLexeme])
                     currentLexeme = ""
                     
                 elif(currentLexeme[0] == "'"):
                     if(len(currentLexeme) > 3 + ( 1 if currentLexeme[1] == "\\" else 0)):
-                        print(currentLexeme)
-                        print(len(currentLexeme))
+                        # print(currentLexeme)
+                        # print(len(currentLexeme))
                         lexicalError.append([str(lineNumber), "L10", "Rune literal exceeded its maximum length"])
                         lexicalToken.append([str(lineNumber), "L10", currentLexeme])
                         currentLexeme = ""
@@ -155,26 +154,18 @@ def tokenize(sourceCode):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
-                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and currentLexeme[len(currentLexeme)-2] != "\\"):
-                        currentLexeme += sourceCode[index]
-                        index += 1
+                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] 
+                       and sourceCode[index] == ";"):
+                        #:currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
+                        # currentLexeme += sourceCode[index]
+                        # index += 1
                         break
            
-                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-2]):
+                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1]  
+                   or currentLexeme[len(currentLexeme)-2] == "\\"):
                     lexicalError.append([str(lineNumber), "L14", "Missing \" (Double quotation)"])
                     lexicalToken.append([str(lineNumber), "L14", currentLexeme])
                     currentLexeme = ""
-                
-                elif("\\" in currentLexeme):
-                    errorMessagge = fightOn.checkStringContent(currentLexeme)
-                    
-                    if(errorMessagge != ""):
-                        lexicalError.append([str(lineNumber), "L15", errorMessagge])
-                        lexicalToken.append([str(lineNumber), "L15", currentLexeme])
-                        currentLexeme = ""
-                    else:
-                        lexicalToken.append([str(lineNumber), "Rope Literal", currentLexeme])
-                        currentLexeme = ""
                 
                 elif(fightOn.checkDelim("LD", "ropelit", sourceCode[index]) and len(currentLexeme) > 2):
                     lexicalToken.append([str(lineNumber), "Rope Literal", currentLexeme])

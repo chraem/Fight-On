@@ -2,13 +2,13 @@
 import sys
 import re
 import json
+from assets.ui_FightOn import Ui_MainWindow
 from fight_on import fightOn, fightOn_lexer, fightOn_parser
 
 from PySide2.QtWidgets import (QMainWindow, QApplication, QTableWidgetItem)
 from PySide2.QtCore import Qt
-#from PySide2.QtGui import QTable
 
-from assets.ui_FightOn import Ui_MainWindow
+from PySide2.QtGui import QIcon
     
 class MainScreen(QMainWindow):
     def __init__(self):
@@ -17,6 +17,7 @@ class MainScreen(QMainWindow):
         self.UI.setupUi(self)
         
         # Initializes UI state
+        self.setWindowIcon(QIcon(r"assets\FightOnLogo.png"))
         self.UI.lineNumberArea_PTE.insertPlainText("1")
         self.UI.lineNumberArea_PTE.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.UI.lineNumberArea_PTE.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -45,8 +46,9 @@ class MainScreen(QMainWindow):
         self.UI.lineNumberArea_PTE.ensureCursorVisible()
                 
     def analyzer(self):
-        self.UI.lexicalError_Tbl.setRowCount(0)
+        self.UI.error_Tbl.setRowCount(0)
         self.UI.lexical_Tbl.setRowCount(0)
+        self.UI.syntax_PTE.clear()
         
         lexicalError, lexicalToken = fightOn_lexer.tokenize(self.removeComments() + " _")
         
@@ -58,7 +60,9 @@ class MainScreen(QMainWindow):
         self.printAnalysis(lexicalError, lexicalToken)
         
         if len(lexicalError) == 0:
-            fightOn_parser.fightOn_parser(lexicalToken)
+            self.UI.syntax_PTE.insertPlainText(str(fightOn_parser.fightOn_parser(lexicalToken)))
+        else:
+            self.UI.syntax_PTE.insertPlainText("SYNTAX CANNOT BE GENERATED AS LONG AS LEXICAL ANALYSIS IS FAILED.")
         
     def removeComments(self):
         with open("reservedWordsAndSymbols.json", "r") as f:
@@ -84,17 +88,17 @@ class MainScreen(QMainWindow):
             self.UI.lexical_Tbl.setRowCount(0)
         
         if lexicalError:
-            self.UI.lexicalError_Tbl.setRowCount(len(lexicalError))
-            self.UI.lexicalError_Tbl.setColumnCount(len(lexicalError[0]))
+            self.UI.error_Tbl.setRowCount(len(lexicalError))
+            self.UI.error_Tbl.setColumnCount(len(lexicalError[0]))
             
             for row in range(len(lexicalError)):
                 for col in range(3):
                     if(lexicalError[row][col] == []):
                         pass
                     else:
-                        self.UI.lexicalError_Tbl.setItem(row, col, QTableWidgetItem(lexicalError[row][col]))
+                        self.UI.error_Tbl.setItem(row, col, QTableWidgetItem(lexicalError[row][col]))
         else: 
-            self.UI.lexicalError_Tbl.setRowCount(0)
+            self.UI.error_Tbl.setRowCount(0)
                     
 if __name__ == '__main__':
     application = QApplication(sys.argv)

@@ -32,21 +32,6 @@ def checkPattern( pattern, currentLexeme):
         return True
     else:
         return False
-    
-def checkStringContent(string):    
-    for i in range(len(string)):
-        if(i == len(string)):
-            break
-        elif(string[len(string)-2] == "\\"):
-            return "Missing \" (Double quotation)"
-        elif(string[i] == "\\" and checkContent("esc_seq", string[i+1])):
-            return ""
-        elif(string[i] == "\\" and checkContent("esc_seq", string[i+1]) and string[len(string)-1] != "\""):
-            return "Missing \" (Double quotation)"
-        elif(string[i] == "\\" and checkContent("esc_seq", string[i+1]) == False):
-            return "Unrecognized escaped character: \\" + string[i+1]  
-        else:
-            continue
         
 def checkKeys(delimName, currentLexeme):
     reservedSymbols = json_file[delimName]
