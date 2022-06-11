@@ -55,9 +55,11 @@ def tokenize(sourceCode):
                         currentLexeme = ""
                         
                     elif(fightOn.checkDelim("LD", "hoverlit", sourceCode[index])):
+                        currentLexeme = currentLexeme.rstrip("0")
                         if(len(currentLexeme.split(".")[1]) > hoverLength):
                             lexicalError.append([str(lineNumber), "L4", "Maximum decimal number exceeded"])
                             lexicalToken.append([str(lineNumber), "L4", currentLexeme])
+                            currentLexeme = ""
                         else:
                             lexicalToken.append([str(lineNumber), "Hover Literal", currentLexeme])
                             currentLexeme = ""
@@ -210,7 +212,10 @@ def tokenize(sourceCode):
                             continue
                         
                         elif(fightOn.checkDelim("RWD", currentLexeme, sourceCode[index])):
-                            lexicalToken.append([str(lineNumber), currentLexeme, currentLexeme])
+                            if(currentLexeme == "heads" or currentLexeme == "tails"):
+                                lexicalToken.append([str(lineNumber), "Coin Literal", currentLexeme])
+                            else:
+                                lexicalToken.append([str(lineNumber), currentLexeme, currentLexeme])
                             currentLexeme = ""
                             break                        
                             
