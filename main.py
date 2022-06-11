@@ -86,6 +86,7 @@ class MainScreen(QMainWindow):
         lexicalError, lexicalToken = fightOn_lexer.tokenize(self.removeComments() + "  ")
         
         if (self.UI.codeEditor_PTE.toPlainText() and (len(lexicalError) == 0 and lexicalToken != 0)):
+            
             try:
                 self.UI.syntax_PTE.insertPlainText(str(fightOn_parser.fightOn_parser(lexicalToken)))
             except Exception as syntaxError:
@@ -105,8 +106,13 @@ class MainScreen(QMainWindow):
                 print("syntaxError", syntaxError)
                 print("errorType", errorType)
                 print("errorMessage", errorMessage)
-                                
-                lexicalError.append(["", errorType, syntaxError.split("\n")[0]])    
+                print("expectedToken", expectedToken)
+                
+                if(errorType in ["UnexpectedEOF"]):
+                    lexicalError.append(["", errorType, syntaxError.split(". ")[0]])
+                    self.UI.syntax_PTE.insertPlainText(syntaxError.split(". ")[1] + "\n")
+                else:
+                    lexicalError.append(["", errorType, syntaxError.split("\n")[0]])    
         else:
             self.UI.syntax_PTE.insertPlainText("SYNTAX ANALYSIS CAN ONLY BE GENERATED IS LEXICAL ANALYSIS PASSED.")
             
@@ -115,7 +121,7 @@ class MainScreen(QMainWindow):
     def removeComments(self):          
         wholeSourceCode = self.UI.codeEditor_PTE.toPlainText()
         
-        commentRegex = re.compile("(<\/.+\/>)|(\\$.+)|(\\$)")
+        commentRegex = re.compile(r"(\<\/+(.+\n+)+\/+\>)|(\$.+)|(\$)")
         commentlessSourceCode = commentRegex.sub("", wholeSourceCode)
         
         return commentlessSourceCode
