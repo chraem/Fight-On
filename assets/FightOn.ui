@@ -18,7 +18,7 @@
     <normaloff>FightOnLogo.png</normaloff>FightOnLogo.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+   <string notr="true"/>
   </property>
   <property name="iconSize">
    <size>
@@ -27,6 +27,9 @@
    </size>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
      <number>0</number>
@@ -159,8 +162,7 @@
                <property name="styleSheet">
                 <string notr="true">background-color:rgb(234, 234, 234);
 border: 1px solid rgb(51, 69, 83);
-border-right: none;
-font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+border-right: none;</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -192,8 +194,13 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
-border: 1px solid rgb(51, 69, 83);
-font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+border: 1px solid rgb(51, 69, 83);</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
                </property>
                <property name="lineWrapMode">
                 <enum>QPlainTextEdit::NoWrap</enum>
@@ -247,8 +254,7 @@ border: 1px solid rgb(51, 69, 83);</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
-border-style: none;
-font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+border-style: none;</string>
                </property>
                <property name="tabPosition">
                 <enum>QTabWidget::North</enum>
@@ -257,7 +263,7 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
                 <enum>QTabWidget::Rounded</enum>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <property name="tabBarAutoHide">
                 <bool>false</bool>
@@ -286,8 +292,13 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
                   <widget class="QTableWidget" name="lexical_Tbl">
                    <property name="styleSheet">
                     <string notr="true">background-color: rgb(255, 255, 255);
-border: 1px solid rgb(51, 69, 83);
-font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+border: 1px solid rgb(51, 69, 83);</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
                    </property>
                    <property name="editTriggers">
                     <set>QAbstractItemView::NoEditTriggers</set>
@@ -328,8 +339,26 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
                  <string>Syntax</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout_5">
+                 <property name="leftMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="spacing">
+                  <number>5</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QPlainTextEdit" name="syntax_PTE">
+                   <property name="styleSheet">
+                    <string notr="true">border: 1px solid rgb(51, 69, 83);</string>
+                   </property>
                    <property name="frameShape">
                     <enum>QFrame::NoFrame</enum>
                    </property>
@@ -392,10 +421,12 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
           </property>
           <item>
            <widget class="QTableWidget" name="error_Tbl">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(255, 255, 255);
-border: 1px solid rgb(51, 69, 83);
-font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
+border: 1px solid rgb(51, 69, 83);</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -413,6 +444,9 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
              <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
             <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
             <attribute name="horizontalHeaderStretchLastSection">
@@ -499,7 +533,6 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
 	color: rgb(51, 69, 83);
 	background-color:rgb(234, 234, 234);
 	border: 1px solid rgb(51, 69, 83);
-	font: 11pt &quot;assets\MonoSpatial.ttf&quot;;
 }</string>
          </property>
          <property name="text">
@@ -529,7 +562,6 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
 	color: rgb(51, 69, 83);
 	background-color:rgb(234, 234, 234);
 	border: 1px solid rgb(51, 69, 83);
-	font: 11pt &quot;assets\MonoSpatial.ttf&quot;;
 }</string>
          </property>
          <property name="text">
@@ -559,7 +591,6 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
 	color: rgb(51, 69, 83);
 	background-color:rgb(234, 234, 234);
 	border: 1px solid rgb(51, 69, 83);
-	font: 11pt &quot;assets\MonoSpatial.ttf&quot;;
 }</string>
          </property>
          <property name="text">
@@ -589,7 +620,6 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
 	color: rgb(51, 69, 83);
 	background-color:rgb(234, 234, 234);
 	border: 1px solid rgb(51, 69, 83);
-	font: 11pt &quot;assets\MonoSpatial.ttf&quot;;
 }</string>
          </property>
          <property name="text">
@@ -618,6 +648,9 @@ font: 11pt &quot;assets\MonoSpatial.ttf&quot;;</string>
        </item>
        <item>
         <widget class="QLabel" name="fileName_Lbl">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string/>
          </property>
