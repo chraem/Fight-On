@@ -107,13 +107,13 @@ def tokenize(sourceCode):
                 currentLexeme += sourceCode[index]
                 index += 1
                 
-                while(index < sourceCodeLength ):
+                while(index < sourceCodeLength):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
-                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
+                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and sourceCode[index] != "'"):
                         break
-                      
+                
                 if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1] ):
                     lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
                     lexicalToken.append([str(lineNumber), "L9", currentLexeme])
@@ -125,20 +125,20 @@ def tokenize(sourceCode):
                         lexicalToken.append([str(lineNumber), "L10", currentLexeme])
                         currentLexeme = ""
                         
-                    elif(currentLexeme[1] == "\\"):
-                        if(fightOn.checkContent("esc_seq", currentLexeme[2]) == False):
-                            lexicalError.append([str(lineNumber), "L11", "Unrecognized escaped character: \\" + currentLexeme[2]])
-                            lexicalToken.append([str(lineNumber), "L11", currentLexeme])
-                            currentLexeme = ""
-                            
+                    elif("\\" in currentLexeme and len(currentLexeme) <= 3):
+                        lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
+                        lexicalToken.append([str(lineNumber), "L9", currentLexeme])
+                        currentLexeme = ""
+                        
                     elif(fightOn.checkDelim("LD", "runelit", sourceCode[index])):
                         lexicalToken.append([str(lineNumber), "Rune Literal", currentLexeme])
                         currentLexeme = ""
+                        
                     else:
                         lexicalError.append([str(lineNumber), "L12", "Unexpected delimiter: " + sourceCode[index]])
                         lexicalToken.append([str(lineNumber), "L12", currentLexeme])
                         currentLexeme = ""
-                    
+                                
                 else:
                     lexicalError.append(str(lineNumber), "L13", "Unexpected delimiter: " + sourceCode[index])
                     lexicalToken.append(str(lineNumber), "L13", currentLexeme)
@@ -152,7 +152,7 @@ def tokenize(sourceCode):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
-                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
+                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] or sourceCode[index] == "\n"):
                         #:currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
                         # currentLexeme += sourceCode[index]
                         # index += 1
