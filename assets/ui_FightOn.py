@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'FightOnrZoGcj.ui'
+## Form generated from reading UI file 'FightOngmXMFw.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -21,10 +21,11 @@ class Ui_MainWindow(object):
         icon = QIcon()
         icon.addFile(u"FightOnLogo.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet(u"font: 11pt \"assets\\MonoSpatial.ttf\";")
+        MainWindow.setStyleSheet(u"")
         MainWindow.setIconSize(QSize(24, 24))
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setStyleSheet(u"font: 11pt \"assets\\MonoSpatial.ttf\";")
         self.gridLayout = QGridLayout(self.centralwidget)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -74,8 +75,7 @@ class Ui_MainWindow(object):
         self.lineNumberArea_PTE.setMaximumSize(QSize(50, 16777215))
         self.lineNumberArea_PTE.setStyleSheet(u"background-color:rgb(234, 234, 234);\n"
 "border: 1px solid rgb(51, 69, 83);\n"
-"border-right: none;\n"
-"font: 11pt \"assets\\MonoSpatial.ttf\";")
+"border-right: none;")
         self.lineNumberArea_PTE.setFrameShape(QFrame.NoFrame)
         self.lineNumberArea_PTE.setFrameShadow(QFrame.Plain)
         self.lineNumberArea_PTE.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -89,8 +89,9 @@ class Ui_MainWindow(object):
         self.codeEditor_PTE.setObjectName(u"codeEditor_PTE")
         self.codeEditor_PTE.setMinimumSize(QSize(478, 393))
         self.codeEditor_PTE.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(51, 69, 83);\n"
-"font: 11pt \"assets\\MonoSpatial.ttf\";")
+"border: 1px solid rgb(51, 69, 83);")
+        self.codeEditor_PTE.setFrameShape(QFrame.NoFrame)
+        self.codeEditor_PTE.setFrameShadow(QFrame.Plain)
         self.codeEditor_PTE.setLineWrapMode(QPlainTextEdit.NoWrap)
         self.codeEditor_PTE.setBackgroundVisible(False)
 
@@ -113,8 +114,7 @@ class Ui_MainWindow(object):
         self.rightTabWidget.setObjectName(u"rightTabWidget")
         self.rightTabWidget.setMinimumSize(QSize(343, 373))
         self.rightTabWidget.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-style: none;\n"
-"font: 11pt \"assets\\MonoSpatial.ttf\";")
+"border-style: none;")
         self.rightTabWidget.setTabPosition(QTabWidget.North)
         self.rightTabWidget.setTabShape(QTabWidget.Rounded)
         self.rightTabWidget.setTabBarAutoHide(False)
@@ -135,8 +135,9 @@ class Ui_MainWindow(object):
         self.lexical_Tbl.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.lexical_Tbl.setObjectName(u"lexical_Tbl")
         self.lexical_Tbl.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(51, 69, 83);\n"
-"font: 11pt \"assets\\MonoSpatial.ttf\";")
+"border: 1px solid rgb(51, 69, 83);")
+        self.lexical_Tbl.setFrameShape(QFrame.NoFrame)
+        self.lexical_Tbl.setFrameShadow(QFrame.Plain)
         self.lexical_Tbl.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.lexical_Tbl.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.lexical_Tbl.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
@@ -149,9 +150,12 @@ class Ui_MainWindow(object):
         self.Syntax = QWidget()
         self.Syntax.setObjectName(u"Syntax")
         self.gridLayout_5 = QGridLayout(self.Syntax)
+        self.gridLayout_5.setSpacing(5)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setContentsMargins(5, 5, 5, 5)
         self.syntax_PTE = QPlainTextEdit(self.Syntax)
         self.syntax_PTE.setObjectName(u"syntax_PTE")
+        self.syntax_PTE.setStyleSheet(u"border: 1px solid rgb(51, 69, 83);")
         self.syntax_PTE.setFrameShape(QFrame.NoFrame)
         self.syntax_PTE.setFrameShadow(QFrame.Plain)
         self.syntax_PTE.setTextInteractionFlags(Qt.NoTextInteraction)
@@ -193,15 +197,16 @@ class Ui_MainWindow(object):
         __qtablewidgetitem5 = QTableWidgetItem()
         self.error_Tbl.setHorizontalHeaderItem(2, __qtablewidgetitem5)
         self.error_Tbl.setObjectName(u"error_Tbl")
+        self.error_Tbl.setMouseTracking(False)
         self.error_Tbl.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(51, 69, 83);\n"
-"font: 11pt \"assets\\MonoSpatial.ttf\";")
+"border: 1px solid rgb(51, 69, 83);")
         self.error_Tbl.setFrameShape(QFrame.NoFrame)
         self.error_Tbl.setFrameShadow(QFrame.Plain)
         self.error_Tbl.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.error_Tbl.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.error_Tbl.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.error_Tbl.setSortingEnabled(True)
+        self.error_Tbl.setWordWrap(True)
         self.error_Tbl.horizontalHeader().setStretchLastSection(True)
         self.error_Tbl.verticalHeader().setVisible(False)
 
@@ -233,7 +238,6 @@ class Ui_MainWindow(object):
 "	color: rgb(51, 69, 83);\n"
 "	background-color:rgb(234, 234, 234);\n"
 "	border: 1px solid rgb(51, 69, 83);\n"
-"	font: 11pt \"assets\\MonoSpatial.ttf\";\n"
 "}")
         self.newFile_Btn.setFlat(True)
 
@@ -247,7 +251,6 @@ class Ui_MainWindow(object):
 "	color: rgb(51, 69, 83);\n"
 "	background-color:rgb(234, 234, 234);\n"
 "	border: 1px solid rgb(51, 69, 83);\n"
-"	font: 11pt \"assets\\MonoSpatial.ttf\";\n"
 "}")
         self.openFile_Btn.setFlat(True)
 
@@ -261,7 +264,6 @@ class Ui_MainWindow(object):
 "	color: rgb(51, 69, 83);\n"
 "	background-color:rgb(234, 234, 234);\n"
 "	border: 1px solid rgb(51, 69, 83);\n"
-"	font: 11pt \"assets\\MonoSpatial.ttf\";\n"
 "}")
         self.saveFile_Btn.setFlat(True)
 
@@ -275,7 +277,6 @@ class Ui_MainWindow(object):
 "	color: rgb(51, 69, 83);\n"
 "	background-color:rgb(234, 234, 234);\n"
 "	border: 1px solid rgb(51, 69, 83);\n"
-"	font: 11pt \"assets\\MonoSpatial.ttf\";\n"
 "}")
         self.run_Btn.setFlat(True)
 
@@ -287,6 +288,7 @@ class Ui_MainWindow(object):
 
         self.fileName_Lbl = QLabel(self.top_Frame)
         self.fileName_Lbl.setObjectName(u"fileName_Lbl")
+        self.fileName_Lbl.setStyleSheet(u"")
         self.fileName_Lbl.setTextInteractionFlags(Qt.NoTextInteraction)
 
         self.horizontalLayout.addWidget(self.fileName_Lbl)
@@ -298,7 +300,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.rightTabWidget.setCurrentIndex(1)
+        self.rightTabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

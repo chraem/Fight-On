@@ -14,9 +14,4 @@ def fightOn_parser(lexicalToken):
     cfg = Lark(r"{}".format(cfgLark), start = "program")
     parseTree = cfg.parse(tokens)
     
-    try:
-        return parseTree.pretty()
-    except Exception as syntaxError:
-        print(">>", syntaxError)
-    
-    
+    return parseTree.pretty()

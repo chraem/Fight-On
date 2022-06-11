@@ -113,16 +113,12 @@ def tokenize(sourceCode):
                         break
                       
                 if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1] ):
-                    # print("currentLexeme(rune): ",currentLexeme[0])
-                    # print("currentLexeme(rune): ",currentLexeme[len(currentLexeme)-2])
                     lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
                     lexicalToken.append([str(lineNumber), "L9", currentLexeme])
                     currentLexeme = ""
                     
                 elif(currentLexeme[0] == "'"):
                     if(len(currentLexeme) > 3 + ( 1 if currentLexeme[1] == "\\" else 0)):
-                        # print(currentLexeme)
-                        # print(len(currentLexeme))
                         lexicalError.append([str(lineNumber), "L10", "Rune literal exceeded its maximum length"])
                         lexicalToken.append([str(lineNumber), "L10", currentLexeme])
                         currentLexeme = ""
@@ -154,8 +150,7 @@ def tokenize(sourceCode):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
-                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] 
-                       and sourceCode[index] == ";"):
+                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
                         #:currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
                         # currentLexeme += sourceCode[index]
                         # index += 1

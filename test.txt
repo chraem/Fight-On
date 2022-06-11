@@ -1,0 +1,14 @@
+II.1. FightOn is a case-sensitive language
+
+start
+$This line is a comment
+quest intro(){
+rope name;
+name = "What's your name, great warrior?";
+listen(name);
+say("Welcome to this Kingdom, ", name);
+}
+PAUSE():
+intro();
+PLAY
+END
