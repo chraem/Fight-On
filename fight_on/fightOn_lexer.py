@@ -3,7 +3,7 @@ from fight_on import fightOn
 def tokenize(sourceCode):
         clockLength = 10            # before decimal point
         hoverLength = 5             # after decimal point
-        identifierMaxLength = 16
+        identifierMaxLength = 25
         lineNumber = 1
         index = 0
         currentLexeme = ""
@@ -204,7 +204,7 @@ def tokenize(sourceCode):
                 
                 while(index < sourceCodeLength):
                     if(fightOn.checkKeys("RWD", currentLexeme)):
-                        if(fightOn.checkContent("alphanumeric", sourceCode[index])):
+                        if(fightOn.checkContent("identifier", sourceCode[index])):
                             currentLexeme += sourceCode[index]
                             index += 1
                             continue
@@ -224,7 +224,7 @@ def tokenize(sourceCode):
                             lexicalToken.append([str(lineNumber), "L19", currentLexeme])
                             currentLexeme = ""
                     
-                    elif(fightOn.checkContent("alphanumeric", sourceCode[index]) == False):
+                    elif(fightOn.checkContent("identifier", sourceCode[index]) == False):
                         break                        
                     
                     else:
@@ -245,7 +245,7 @@ def tokenize(sourceCode):
                     lexicalError.append([str(lineNumber), "L21", currentLexeme + ", an identifier, exceeded its maximum length"])
                     lexicalToken.append([str(lineNumber), "L21", currentLexeme])
                     currentLexeme = ""
-                
+                    
                 else:
                     lexicalToken.append([ str(lineNumber), "Identifier",currentLexeme])
                     currentLexeme = ""
@@ -253,6 +253,8 @@ def tokenize(sourceCode):
             else:
                 currentLexeme += sourceCode[index]
                 lexicalError.append([str(lineNumber), "L22", "Can't define: " + currentLexeme])
+                lexicalToken.append([str(lineNumber), "L22", currentLexeme])
+                currentLexeme = ""
                 index+=1
             
         return lexicalError, lexicalToken
