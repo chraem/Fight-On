@@ -111,10 +111,12 @@ def tokenize(sourceCode):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
+                    if(currentLexeme[len(currentLexeme)-1] == "\n"): 
+                        break
                     if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and sourceCode[index] != "'"):
                         break
                 
-                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1] ):
+                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1]):
                     lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
                     lexicalToken.append([str(lineNumber), "L9", currentLexeme])
                     currentLexeme = ""
@@ -153,9 +155,6 @@ def tokenize(sourceCode):
                     index += 1
                     
                     if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] or sourceCode[index] == "\n"):
-                        #:currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
-                        # currentLexeme += sourceCode[index]
-                        # index += 1
                         break
            
                 if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1]  
