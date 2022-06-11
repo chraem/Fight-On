@@ -83,14 +83,9 @@ class MainScreen(QMainWindow):
         self.UI.lexical_Tbl.setRowCount(0)
         self.UI.syntax_PTE.clear()
         
-        lexicalError, lexicalToken = fightOn_lexer.tokenize(self.removeComments() + " _")
+        lexicalError, lexicalToken = fightOn_lexer.tokenize(self.removeComments() + "  ")
         
-        for row in range(len(lexicalError)):
-                for col in range(3):
-                    if("_" in lexicalError[row][col]):
-                        del lexicalError[row]
-        
-        if (self.UI.codeEditor_PTE.toPlainText() and len(lexicalError) == 0 and lexicalToken != 0):
+        if (self.UI.codeEditor_PTE.toPlainText() and (len(lexicalError) == 0 and lexicalToken != 0)):
             try:
                 self.UI.syntax_PTE.insertPlainText(str(fightOn_parser.fightOn_parser(lexicalToken)))
             except Exception as syntaxError:
@@ -100,9 +95,12 @@ class MainScreen(QMainWindow):
                 syntaxError = str(syntaxError)
         
                 errorMessage = re.findall("(.+\n *\^)", syntaxError)
-                expectedToken = syntaxError[syntaxError.index("Expected"):]
                 
-                self.UI.syntax_PTE.insertPlainText(errorMessage[0] + "\n" + expectedToken)
+                try:
+                    expectedToken = syntaxError[syntaxError.index("Expected"):]
+                    self.UI.syntax_PTE.insertPlainText(errorMessage[0] + "\n" + expectedToken)
+                except:
+                    pass
                 
                 print("syntaxError", syntaxError)
                 print("errorType", errorType)
