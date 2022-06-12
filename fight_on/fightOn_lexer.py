@@ -107,38 +107,59 @@ def tokenize(sourceCode):
                 currentLexeme += sourceCode[index]
                 index += 1
                 
-                while(index < sourceCodeLength ):
+                while(index < sourceCodeLength):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
-                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
+                    if(currentLexeme[len(currentLexeme)-1] == "\\"):
+                        currentLexeme += sourceCode[index]
+                        index += 1
+                        # print("+",currentLexeme)
+                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and sourceCode[index] != "'"):
+                    #    print(">>", currentLexeme)
                         break
-                      
-                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1] ):
+                    if(currentLexeme[len(currentLexeme)-1] == "\n")                  :
+                        break
+                # print("$", currentLexeme)
+                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1]):
                     lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
                     lexicalToken.append([str(lineNumber), "L9", currentLexeme])
                     currentLexeme = ""
                     
                 elif(currentLexeme[0] == "'"):
+                    # print("*", currentLexeme)
                     if(len(currentLexeme) > 3 + ( 1 if currentLexeme[1] == "\\" else 0)):
                         lexicalError.append([str(lineNumber), "L10", "Rune literal exceeded its maximum length"])
                         lexicalToken.append([str(lineNumber), "L10", currentLexeme])
                         currentLexeme = ""
                         
-                    elif(currentLexeme[1] == "\\"):
-                        if(fightOn.checkContent("esc_seq", currentLexeme[2]) == False):
+                    elif("\\" in currentLexeme):
+                        # print("#", currentLexeme)
+                        if(len(currentLexeme) <= 3):
+                            lexicalError.append([str(lineNumber), "L9", "Missing ' (Single quotation)"])
+                            lexicalToken.append([str(lineNumber), "L9", currentLexeme])
+                            currentLexeme = ""
+                    
+                        elif(currentLexeme[2] not in ["t", "n", "\\", "'", "\""]):
+                            # print("^", currentLexeme)
                             lexicalError.append([str(lineNumber), "L11", "Unrecognized escaped character: \\" + currentLexeme[2]])
                             lexicalToken.append([str(lineNumber), "L11", currentLexeme])
                             currentLexeme = ""
+                        
+                        else:
+                            lexicalToken.append([str(lineNumber), "Rune Literal", currentLexeme])
+                            currentLexeme = ""
                             
+                        #print("=", currentLexeme)
                     elif(fightOn.checkDelim("LD", "runelit", sourceCode[index])):
                         lexicalToken.append([str(lineNumber), "Rune Literal", currentLexeme])
                         currentLexeme = ""
+                        
                     else:
                         lexicalError.append([str(lineNumber), "L12", "Unexpected delimiter: " + sourceCode[index]])
                         lexicalToken.append([str(lineNumber), "L12", currentLexeme])
                         currentLexeme = ""
-                    
+                                
                 else:
                     lexicalError.append(str(lineNumber), "L13", "Unexpected delimiter: " + sourceCode[index])
                     lexicalToken.append(str(lineNumber), "L13", currentLexeme)
@@ -148,23 +169,47 @@ def tokenize(sourceCode):
                 currentLexeme += sourceCode[index]
                 index += 1
                     
-                while(index < sourceCodeLength and sourceCode[index] != "\n"):
+                while(index < sourceCodeLength):
                     currentLexeme += sourceCode[index]
                     index += 1
                     
-                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
-                        #:currentLexeme[0] == currentLexeme[len(currentLexeme)-1]):
-                        # currentLexeme += sourceCode[index]
-                        # index += 1
+                    if(currentLexeme[len(currentLexeme)-1] == "\\"):
+                        currentLexeme += sourceCode[index]
+                        index += 1
+                        # print("s+",currentLexeme)
+                        
+                        if(currentLexeme[len(currentLexeme) -1 ] in ["t", "n", "\\", "'", "\""]):
+                            currentLexeme += sourceCode[index]
+                            index += 1
+                            # print("a+",currentLexeme)
+                        else:
+                            lexicalError.append([str(lineNumber), "L11", "Unrecognized escaped character: \\" 
+                                                 + currentLexeme[len(currentLexeme) -1 ]])
+                            lexicalToken.append([str(lineNumber), "L11", currentLexeme])
+                            currentLexeme += sourceCode[index]
+                            index += 1
+                            # print("b+",currentLexeme)
+                    if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and sourceCode[index] != "\""):
+                        # print(">>", currentLexeme)
                         break
-           
-                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1]  
-                   or currentLexeme[len(currentLexeme)-2] == "\\"):
+                    if(currentLexeme[len(currentLexeme)-1] == "\n")                  :
+                        break
+                    
+                if(currentLexeme[0] != currentLexeme[len(currentLexeme)-1]):
                     lexicalError.append([str(lineNumber), "L14", "Missing \" (Double quotation)"])
                     lexicalToken.append([str(lineNumber), "L14", currentLexeme])
                     currentLexeme = ""
                 
-                elif(fightOn.checkDelim("LD", "ropelit", sourceCode[index]) and len(currentLexeme) > 2):
+                elif(currentLexeme[len(currentLexeme)-2] == "\\"):
+                    if (currentLexeme[len(currentLexeme) - 3] == "\\" and fightOn.checkDelim("LD", "ropelit", sourceCode[index])):
+                        lexicalToken.append([str(lineNumber), "Rope Literal", currentLexeme])
+                        currentLexeme = ""
+                    else:   
+                        lexicalError.append([str(lineNumber), "L14", "Missing \" (Double quotation)"])
+                        lexicalToken.append([str(lineNumber), "L14", currentLexeme])
+                        currentLexeme = ""
+                
+                elif(fightOn.checkDelim("LD", "ropelit", sourceCode[index])):
                     lexicalToken.append([str(lineNumber), "Rope Literal", currentLexeme])
                     currentLexeme = ""
 
