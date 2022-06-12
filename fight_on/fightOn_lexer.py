@@ -114,7 +114,7 @@ def tokenize(sourceCode):
                     if(currentLexeme[len(currentLexeme)-1] == "\\"):
                         currentLexeme += sourceCode[index]
                         index += 1
-                        print("+",currentLexeme)
+                        # print("+",currentLexeme)
                     if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and sourceCode[index] != "'"):
                     #    print(">>", currentLexeme)
                         break
@@ -176,21 +176,21 @@ def tokenize(sourceCode):
                     if(currentLexeme[len(currentLexeme)-1] == "\\"):
                         currentLexeme += sourceCode[index]
                         index += 1
-                        print("s+",currentLexeme)
+                        # print("s+",currentLexeme)
                         
                         if(currentLexeme[len(currentLexeme) -1 ] in ["t", "n", "\\", "'", "\""]):
                             currentLexeme += sourceCode[index]
                             index += 1
-                            print("a+",currentLexeme)
+                            # print("a+",currentLexeme)
                         else:
                             lexicalError.append([str(lineNumber), "L11", "Unrecognized escaped character: \\" 
                                                  + currentLexeme[len(currentLexeme) -1 ]])
                             lexicalToken.append([str(lineNumber), "L11", currentLexeme])
                             currentLexeme += sourceCode[index]
                             index += 1
-                            print("b+",currentLexeme)
+                            # print("b+",currentLexeme)
                     if(currentLexeme[0] == currentLexeme[len(currentLexeme)-1] and sourceCode[index] != "\""):
-                        print(">>", currentLexeme)
+                        # print(">>", currentLexeme)
                         break
                     if(currentLexeme[len(currentLexeme)-1] == "\n")                  :
                         break

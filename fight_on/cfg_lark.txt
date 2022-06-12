@@ -16,11 +16,11 @@ literals: "ClockLiteral"
     | "RuneLiteral" 
     | "RopeLiteral"
 assign_oprtr: "="    
-    | "+="
-    | "-="
-    | "*="
-    | "/="
-    | "%="
+    | "PLUSEQUAL"
+    | "MINEQUAL"
+    | "MULTEQUAL"
+    | "DIVEQUAL"
+    | "MODEQUAL"
 notassign_operators: "+"
     | "-"
     | "*"
@@ -30,12 +30,12 @@ notassign_operators: "+"
     | "OR"
     | "<"
     | ">"
-    | ">="
-    | "<="
-    | "=="
-    | "!="
-unary_oprtr: "++"
-    | "--"
+    | "GTEQUAL"
+    | "LTEQUAL"
+    | "EQEQUAL"
+    | "NOTEQUAL"
+unary_oprtr: "INCREMENT"
+    | "DECREMENT"
 
 expr: expression exprs*
 
@@ -121,8 +121,8 @@ expression_null: expression
 
 iteration: "Identifier" array1d_ind* id_at* iteration_suffix
 
-iteration_suffix: "++"
-    | "--"
+iteration_suffix: "INCREMENT"
+    | "DECREMENT"
     | assign_oprtr expression
 kick_statement: "kick" "(" expression ")" "{" statements* "}" kick_statement*
 

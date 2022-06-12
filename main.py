@@ -2,7 +2,7 @@ import sys
 import re
 import os
 from assets.ui_FightOn import Ui_MainWindow
-from fight_on import fightOn_lexer, fightOn_parser
+from fight_on import fightOn_lexer, fightOn_parser, fightOn
 from PySide2.QtWidgets import (QMainWindow, QApplication, QTableWidgetItem, QFileDialog)
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QIcon, QFont
@@ -99,14 +99,14 @@ class MainScreen(QMainWindow):
                 
                 try:
                     expectedToken = syntaxError[syntaxError.index("Expected"):]
-                    self.UI.syntax_PTE.insertPlainText(errorMessage[0] + "\n" + expectedToken)
+                    self.UI.syntax_PTE.insertPlainText(fightOn.revert(errorMessage[0]) + "\n" + expectedToken)
                 except:
                     pass
                 
-                print("syntaxError", syntaxError)
-                print("errorType", errorType)
-                print("errorMessage", errorMessage)
-                print("expectedToken", expectedToken)
+                # print("syntaxError", syntaxError)
+                # print("errorType", errorType)
+                # print("errorMessage", errorMessage)
+                # print("expectedToken", expectedToken)
                 
                 if(errorType in ["UnexpectedEOF"]):
                     lexicalError.append(["", errorType, syntaxError.split(". ")[0]])
