@@ -114,7 +114,7 @@ class MainScreen(QMainWindow):
                 else:
                     lexicalError.append(["", errorType, syntaxError.split("\n")[0]])    
         else:
-            self.UI.syntax_PTE.insertPlainText("SYNTAX ANALYSIS CAN ONLY BE GENERATED IS LEXICAL ANALYSIS PASSED.")
+            self.UI.syntax_PTE.insertPlainText("Syntax analysis can only be generated once lexical analysis has passed.")
             
         self.printAnalysis(lexicalError, lexicalToken)
         
