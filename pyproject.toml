@@ -8,6 +8,7 @@ authors = ["chraem <calumbiranc@gmail.com>"]
 python = ">=3.10,<3.11"
 PySide2 = "^5.15.2"
 lark = "^1.1.2"
+pyinstaller = "^5.1"
 
 [tool.poetry.dev-dependencies]
 
