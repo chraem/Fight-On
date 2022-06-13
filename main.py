@@ -121,9 +121,16 @@ class MainScreen(QMainWindow):
     def removeComments(self):          
         wholeSourceCode = self.UI.codeEditor_PTE.toPlainText()
         
-        commentRegex = re.compile(r"(\<\/+(.+\n+)+\/+\>)|(\$.+)|(\$)")
+        commentRegex = re.compile(r"(\$.+)|(\$)")
         commentlessSourceCode = commentRegex.sub("", wholeSourceCode)
         
+        a = 0
+        multilineComments = re.findall(r"<\/[\s\S]*?\/>", commentlessSourceCode)
+        
+        while(a < len(multilineComments)):
+            commentlessSourceCode = re.sub(r"<\/[\s\S]*?\/>", "", commentlessSourceCode)
+            a+=1
+                        
         return commentlessSourceCode
 
     def printAnalysis(self, lexicalError, lexicalToken):

@@ -106,7 +106,7 @@ statement: "STOCK" type "Identifier" stock_dec morestock_dec* ";"
     | "skip" ";"
     | "bag" "(" expression ")" "{" item_statement* potion_statement* "}"
     | "flight" "(" expression ")" "{" statements* "}"
-    | "take" "{" statements* "}" "(" expression ")" ";"
+    | "take" "{" statements* "}" "flight" "(" expression ")" ";"
     | "punch" "(" expression ")" "{" statements* "}" kick_statement* ultimate_statement*
     | "say" "(" expression exprs* ")" ";"
     | "listen" "(" "Identifier" array1d_ind* id_at* ")" ";"

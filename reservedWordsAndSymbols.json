@@ -1755,7 +1755,8 @@
         "sprint": "delim0",
         "tails": "coin_delim",
         "take": "takeUlti_delim",
-        "ultimate": "takeUlti_delim"
+        "ultimate": "takeUlti_delim",
+        "tower": "whitespace"
     },
     "RSD": {
         "(": "op_delim",
