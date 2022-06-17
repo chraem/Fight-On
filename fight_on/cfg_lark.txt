@@ -2,8 +2,8 @@ program : "START" global* "PAUSE" "(" ")" ":" statements* "PLAY" "END"
 global: global_statement global*
 
 global_statement: "STOCK" type "Identifier" stock_dec morestock_dec* ";"
-    | "tower" "Identifier" "{" type "Identifier" array1d_ind* moretowermem* ";" moretowermem_dec* "}" ";"
-    | type "Identifier" vardec_opt* morevardec_opt* ";"
+    | "tower" "Identifier" "{" type "Identifier" array1d_ind? moretowermem* ";" moretowermem_dec* "}" ";"
+    | type "Identifier" vardec_opt? morevardec_opt* ";"
     | "quest" "Identifier" "(" func_param* ")" "{" statements* "}"
 type: "clock" 
     | "hover" 
@@ -56,13 +56,13 @@ morestock_arr1d: "," stock_array1d morestock_arr1d*
 
 morestock_arr2d: "," stock_array2d morestock_arr2d* 
 
-moretowermem: "," "Identifier" array1d_ind* moretowermem*
+moretowermem: "," "Identifier" array1d_ind? moretowermem*
 
-moretowermem_dec: type "Identifier" array1d_ind* moretowermem* ";" moretowermem_dec*
+moretowermem_dec: type "Identifier" array1d_ind? moretowermem* ";" moretowermem_dec*
 
-array1d_ind: "[" expression "]" array2d_ind*
+array1d_ind: "[" expression "]" array2d_ind?
 
-array2d_ind: "[" expression "]" array3d_ind*
+array2d_ind: "[" expression "]" array3d_ind?
 
 array3d_ind: "[" expression "]"
 
@@ -74,18 +74,18 @@ expression: literals expr_ext*
 expr_ext: notassign_operators expression
 
 id_suffix: "(" expr* ")"
-    | array1d_ind* id_at* unary_oprtr*
-id_at: "@" "Identifier" array1d_ind*
+    | array1d_ind? id_at* unary_oprtr*
+id_at: "@" "Identifier" array1d_ind?
 
 vardec_opt: "=" expression
-    | "[" expression "]" array1d*
+    | "[" expression "]" array1d?
 
-morevardec_opt: "," "Identifier" vardec_opt* morevardec_opt*
+morevardec_opt: "," "Identifier" vardec_opt? morevardec_opt*
 
-array1d: "[" expression "]" array2d*
+array1d: "[" expression "]" array2d?
     | "=" stock_array1d
 
-array2d: "[" expression "]" array3d* 
+array2d: "[" expression "]" array3d?
     | "=" stock_array2d
 
 array3d: "=" stock_array3d
@@ -99,7 +99,7 @@ parameters: "," parameter parameters*
 statements: statement statements*
 
 statement: "STOCK" type "Identifier" stock_dec morestock_dec* ";"
-    | type "Identifier" vardec_opt* morevardec_opt* ";"
+    | type "Identifier" vardec_opt? morevardec_opt* ";"
     | "Identifier" startswith_idnext ";"
     | "sprint" "(" initialization* ";" expression_null* ";" iteration* ")" "{" statements* "}"
     | "quit" ";"
@@ -109,17 +109,17 @@ statement: "STOCK" type "Identifier" stock_dec morestock_dec* ";"
     | "take" "{" statements* "}" "flight" "(" expression ")" ";"
     | "punch" "(" expression ")" "{" statements* "}" kick_statement* ultimate_statement*
     | "say" "(" expression exprs* ")" ";"
-    | "listen" "(" "Identifier" array1d_ind* id_at* ")" ";"
+    | "listen" "(" "Identifier" array1d_ind? id_at* ")" ";"
     | "return" expression_null* ";"
-startswith_idnext: "Identifier" array1d_ind* moretowermem*
+startswith_idnext: "Identifier" array1d_ind? moretowermem*
     | "(" expr* ")"
-    | array1d_ind* id_at* iteration_suffix*
+    | array1d_ind? id_at* iteration_suffix*
 initialization: type "Identifier" "=" expression
-    | "Identifier" array1d_ind* id_at* assign_oprtr expression
+    | "Identifier" array1d_ind? id_at* assign_oprtr expression
 
 expression_null: expression
 
-iteration: "Identifier" array1d_ind* id_at* iteration_suffix
+iteration: "Identifier" array1d_ind? id_at* iteration_suffix
 
 iteration_suffix: "INCREMENT"
     | "DECREMENT"
