@@ -46,11 +46,11 @@ class MainScreen(QMainWindow):
                 savedFile.write(self.UI.codeEditor_PTE.toPlainText())
     
     def openFile(self):
-        
         fileDir, _ = QFileDialog.getOpenFileName(self, caption="Open File", dir=os.path.expanduser("~/Desktop"), 
                                                filter="Text Document (*.txt)")
         
         if fileDir:
+            self.clearAll()
             with open(fileDir, "r") as openedFile:
                 fileContent = openedFile.read()
             
